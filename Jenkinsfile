@@ -6,6 +6,15 @@ pipeline {
         git url: 'https://github.com/simolin7812/nginx.git', branch: 'main'
       }
     }
+    stage('docker build') {
+      steps {
+        sh '''
+        docker build -t multi-img .
+        docker tag multi-img 192.168.0.52:5000/multi-img
+        docker push 192.168.0.52:5000/multi-img
+        '''
+      }
+    }
     stage('deploy kubernetes') {
       steps {
         sh '''
