@@ -9,7 +9,7 @@ pipeline {
     stage('deploy kubernetes') {
       steps {
         sh '''
-        kubectl create deployment nginx --image=192.168.0.52:5000/multi-img
+        kubectl create deployment nginx --image=192.168.0.52:5000/multi-img:latest
         kubectl expose deployment nginx --type=LoadBalancer --port=8080 \
                                                --target-port=80 --name=nginx-svc
         '''
